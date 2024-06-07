@@ -3,6 +3,7 @@ from langchain.chains import LLMChain, APIChain
 from prompts import ice_cream_assistant_prompt, api_response_prompt, api_url_prompt
 from langchain.memory.buffer import ConversationBufferMemory
 from api_docs import scoopsie_api_docs
+from langchain_openai import ChatOpenAI
 
 from dotenv import load_dotenv
 
@@ -13,8 +14,7 @@ load_dotenv()
 
 @cl.on_chat_start
 def setup_multiple_chains():
-    llm = OpenAI(model='gpt-3.5-turbo-instruct',
-                 temperature=0)
+    llm = ChatOpenAI( model="gpt-4o")
     conversation_memory = ConversationBufferMemory(memory_key="chat_history",
                                                    max_len=200,
                                                    return_messages=True,
